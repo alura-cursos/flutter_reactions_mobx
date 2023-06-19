@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 
 import '../stores/form_store.dart';
 import 'connectivity_page.dart';
@@ -14,26 +12,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formStore = FormStore();
-
-  @override
-  void initState() {
-    autorun((_) {
-      // ignore: avoid_print
-      print('AUTORUN: O formulário é válido? ${formStore.isValid}.');
-    });
-
-    reaction((_) => formStore.isValid, (_) {
-      // ignore: avoid_print
-      print('REACTION: O formulário é válido? ${formStore.isValid}.');
-    });
-
-    when((_) => formStore.isValid, () {
-      // ignore: avoid_print
-      print('WHEN: O formulário é válido? ${formStore.isValid}.');
-    });
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,20 +80,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Observer(
-                builder: (_) => formStore.isValid
-                    ? InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ConnectivityPage(),
-                            ),
-                          );
-                        },
-                        child: const CustomButton(isValid: true),
-                      )
-                    : const CustomButton(isValid: false),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ConnectivityPage(),
+                    ),
+                  );
+                },
+                child: const CustomButton(isValid: true),
               ),
             ],
           ),
