@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../stores/form_store.dart';
 import 'connectivity_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,7 +10,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final formStore = FormStore();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 48.0),
                 child: TextFormField(
-                  onChanged: (value) => formStore.setUsername(value),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -58,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 48.0),
                 child: TextFormField(
-                  onChanged: (value) => formStore.setPassword(value),
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
